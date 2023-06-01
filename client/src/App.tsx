@@ -138,9 +138,11 @@ function App() {
           notificationProvider={notificationProvider}
           ReadyPage={ReadyPage}
           catchAll={<ErrorComponent />}
+          legacyRouterProvider={routerProvider}
+          authProvider={authProvider}
           resources={[
             {
-              name: "property",
+              name: "properties",
               list: AllProperties,
               show: PropertyDetails,
               create: CreateProperty,
@@ -148,18 +150,18 @@ function App() {
               icon: <VillaOutlined />,
             },
             {
-              name: "agent",
+              name: "agents",
               list: Agents,
               show: AgentProfile,
               icon: <PeopleAltOutlined />,
             },
             {
-              name: "review",
+              name: "reviews",
               list: Home,
               icon: <StarOutlineRounded />,
             },
             {
-              name: "message",
+              name: "messages",
               list: Home,
               icon: <ChatBubbleOutline />,
             },
@@ -174,8 +176,6 @@ function App() {
           Sider={Sider}
           Layout={Layout}
           Header={Header}
-          legacyRouterProvider={routerProvider}
-          authProvider={authProvider}
           LoginPage={Login}
           DashboardPage={Home}
         />

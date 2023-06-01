@@ -11,6 +11,7 @@
     "@mui/x-data-grid": "^5.12.1",
     "@pankod/refine-inferencer": "^2.10.0",
     "@pankod/refine-mui": "^3.63.0",
+    "@pankod/refine-react-router-v6": "^3.40.0",
     "@refinedev/cli": "^2.5.1",
     "@refinedev/core": "^4.5.8",
     "@refinedev/inferencer": "^3.5.4",
