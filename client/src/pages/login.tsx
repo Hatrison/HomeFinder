@@ -5,10 +5,10 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import { homefinder } from "../assets";
-
 import { CredentialResponse } from "../interfaces/google";
+import { homefinder } from "assets";
 
+// Todo: Update your Google Client ID here
 const GOOGLE_CLIENT_ID =
   "753289711306-4qqfttbs9ujqsqtuqp4gtl8r6m7c7p38.apps.googleusercontent.com";
 
