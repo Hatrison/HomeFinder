@@ -7,8 +7,17 @@ import {
   ReadyPage,
   ErrorComponent,
 } from "@refinedev/mui";
+import {
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+} from "@mui/icons-material";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
+
+import { MuiInferencer } from "@pankod/refine-inferencer/mui";
 
 import dataProvider from "@refinedev/simple-rest";
 import routerProvider from "@refinedev/react-router-v6/legacy";
@@ -18,7 +27,17 @@ import { ColorModeContextProvider } from "contexts";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
 
-import { Login } from "pages/login";
+import {
+  Login,
+  Home,
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty,
+  AgentProfile,
+  EditProperty,
+} from "pages";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -123,24 +142,30 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "blog_posts",
-              list: "/blog-posts",
-              create: "/blog-posts/create",
-              edit: "/blog-posts/edit/:id",
-              show: "/blog-posts/show/:id",
-              meta: {
-                canDelete: true,
-              },
+              name: "property",
+              list: MuiInferencer,
+              icon: <VillaOutlined />,
             },
             {
-              name: "categories",
-              list: "/categories",
-              create: "/categories/create",
-              edit: "/categories/edit/:id",
-              show: "/categories/show/:id",
-              meta: {
-                canDelete: true,
-              },
+              name: "agent",
+              list: MuiInferencer,
+              icon: <PeopleAltOutlined />,
+            },
+            {
+              name: "review",
+              list: MuiInferencer,
+              icon: <StarOutlineRounded />,
+            },
+            {
+              name: "message",
+              list: MuiInferencer,
+              icon: <ChatBubbleOutline />,
+            },
+            {
+              name: "my-profile",
+              options: { label: "My Profile" },
+              list: MuiInferencer,
+              icon: <AccountCircleOutlined />,
             },
           ]}
           Title={Title}
@@ -150,6 +175,7 @@ function App() {
           legacyRouterProvider={routerProvider}
           authProvider={authProvider}
           LoginPage={Login}
+          DashboardPage={Home}
         />
       </RefineSnackbarProvider>
     </ColorModeContextProvider>
