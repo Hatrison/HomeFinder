@@ -11,8 +11,8 @@ const CustomButton = ({
   fullWidth,
   icon,
 }: CustomButtonProps) => {
-  return (
-    <Link to={path}>
+  const Btn = () => {
+    return (
       <Button
         sx={{
           flex: fullWidth ? 1 : "unset",
@@ -34,7 +34,15 @@ const CustomButton = ({
         {icon}
         {title}
       </Button>
+    );
+  };
+
+  return path ? (
+    <Link to={path}>
+      <Btn />
     </Link>
+  ) : (
+    <Btn />
   );
 };
 
