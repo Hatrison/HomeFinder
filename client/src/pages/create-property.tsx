@@ -2,8 +2,10 @@ import { useState } from "react";
 import { FieldValues, useForm } from "@pankod/refine-react-hook-form";
 import Form from "components/common/Form";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const CreateProperty = () => {
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
   const {
     refineCore: { onFinish, formLoading },
@@ -35,6 +37,8 @@ const CreateProperty = () => {
         photo: propertyImage.url,
         email: parsedUser.email,
       });
+
+      setShouldRedirect(true);
     }
   };
 
@@ -52,16 +56,19 @@ const CreateProperty = () => {
   };
 
   return (
-    <Form
-      type="Create"
-      register={register}
-      onFinish={onFinish}
-      formLoading={formLoading}
-      handleSubmit={handleSubmit}
-      handleImageChange={handleImageChange}
-      onFinishHandler={onFinishHandler}
-      propertyImage={propertyImage}
-    />
+    <>
+      {shouldRedirect && <Navigate to="/properties" replace />}
+      <Form
+        type="Create"
+        register={register}
+        onFinish={onFinish}
+        formLoading={formLoading}
+        handleSubmit={handleSubmit}
+        handleImageChange={handleImageChange}
+        onFinishHandler={onFinishHandler}
+        propertyImage={propertyImage}
+      />
+    </>
   );
 };
 
