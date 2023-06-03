@@ -7,6 +7,13 @@ import {
   ReadyPage,
   ErrorComponent,
 } from "@refinedev/mui";
+import {
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+} from "@mui/icons-material";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
@@ -18,7 +25,17 @@ import { ColorModeContextProvider } from "contexts";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
 
-import { Login } from "pages/login";
+import {
+  Login,
+  Home,
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty,
+  AgentProfile,
+  EditProperty,
+} from "pages";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -121,35 +138,46 @@ function App() {
           notificationProvider={notificationProvider}
           ReadyPage={ReadyPage}
           catchAll={<ErrorComponent />}
+          legacyRouterProvider={routerProvider}
+          authProvider={authProvider}
           resources={[
             {
-              name: "blog_posts",
-              list: "/blog-posts",
-              create: "/blog-posts/create",
-              edit: "/blog-posts/edit/:id",
-              show: "/blog-posts/show/:id",
-              meta: {
-                canDelete: true,
-              },
+              name: "properties",
+              list: AllProperties,
+              show: PropertyDetails,
+              create: CreateProperty,
+              edit: EditProperty,
+              icon: <VillaOutlined />,
             },
             {
-              name: "categories",
-              list: "/categories",
-              create: "/categories/create",
-              edit: "/categories/edit/:id",
-              show: "/categories/show/:id",
-              meta: {
-                canDelete: true,
-              },
+              name: "agents",
+              list: Agents,
+              show: AgentProfile,
+              icon: <PeopleAltOutlined />,
+            },
+            {
+              name: "reviews",
+              list: Home,
+              icon: <StarOutlineRounded />,
+            },
+            {
+              name: "messages",
+              list: Home,
+              icon: <ChatBubbleOutline />,
+            },
+            {
+              name: "my-profile",
+              options: { label: "My Profile" },
+              list: MyProfile,
+              icon: <AccountCircleOutlined />,
             },
           ]}
           Title={Title}
           Sider={Sider}
           Layout={Layout}
           Header={Header}
-          legacyRouterProvider={routerProvider}
-          authProvider={authProvider}
           LoginPage={Login}
+          DashboardPage={Home}
         />
       </RefineSnackbarProvider>
     </ColorModeContextProvider>
