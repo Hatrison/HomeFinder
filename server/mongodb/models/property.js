@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PropertySchema = new mongoose.UserSchema({
+const PropertySchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   propertyType: { type: String, required: true },
@@ -10,4 +10,5 @@ const PropertySchema = new mongoose.UserSchema({
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
-exports.propertyModel = mongoose.model("Property", PropertySchema);
+const propertyModel = mongoose.model("Property", PropertySchema);
+module.exports = propertyModel;

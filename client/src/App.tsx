@@ -57,20 +57,35 @@ function App() {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            ...profileObj,
+        const response = await fetch("http://localhost:8080/api/v1/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: profileObj.name,
+            email: profileObj.email,
             avatar: profileObj.picture,
-          })
-        );
+          }),
+        });
 
-        localStorage.setItem("token", `${credential}`);
+        const data = await response.json();
 
-        return {
-          success: true,
-          redirectTo: "/",
-        };
+        if (response.status === 200) {
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              ...profileObj,
+              avatar: profileObj.picture,
+              userid: data._id,
+            })
+          );
+
+          localStorage.setItem("token", `${credential}`);
+
+          return {
+            success: true,
+            redirectTo: "/",
+          };
+        }
       }
 
       return {

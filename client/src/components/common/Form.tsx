@@ -36,7 +36,7 @@ const Form = ({
             flexDirection: "column",
             gap: "20px",
           }}
-          onSubmit={handleSubmit(onFinishHandler)}
+          onSubmit={handleSubmit}
         >
           <FormControl>
             <FormHelperText
