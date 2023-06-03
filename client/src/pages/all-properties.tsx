@@ -1,8 +1,27 @@
 import { Add } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@pankod/refine-mui";
-import { CustomButton } from "components";
+import axios from "axios";
+import { CustomButton, PropertyCard } from "components";
+import { useEffect, useState } from "react";
 
 const AllProperties = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/properties"
+        );
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProperties();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -17,6 +36,19 @@ const AllProperties = () => {
           icon={<Add />}
         />
       </Stack>
+
+      <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+        {data.map((property: any) => (
+          <PropertyCard
+            key={property._id}
+            id={property._id}
+            title={property.title}
+            price={property.price}
+            location={property.location}
+            photo={property.photo}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };
