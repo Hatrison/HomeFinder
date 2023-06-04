@@ -7,6 +7,7 @@ export interface CustomButtonProps {
   icon?: ReactNode;
   disabled?: boolean;
   path?: string;
+  handleClick?: () => void;
 }
 
 export interface ProfileProps {
