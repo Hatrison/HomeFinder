@@ -81,7 +81,6 @@ const PropertyDetails = () => {
     if (user) {
       const parsedUser = JSON.parse(user);
       setIsCurrentUser(parsedUser.email === data.creator.email);
-      console.log(data);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
