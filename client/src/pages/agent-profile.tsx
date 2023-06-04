@@ -1,7 +1,7 @@
 import React from "react";
 
-const agentProfile = () => {
+const AgentProfile = () => {
   return <div>agent-profile</div>;
 };
 
-export default agentProfile;
+export default AgentProfile;
