@@ -12,16 +12,28 @@ import {
 } from "@pankod/refine-mui";
 import { FormProps } from "interfaces/common";
 import CustomButton from "./CustomButton";
+import { useEffect, useState } from "react";
 
 const Form = ({
   type,
-  register,
   handleSubmit,
   handleImageChange,
-  formLoading,
   onFinishHandler,
   propertyImage,
+  data = {
+    title: "",
+    description: "",
+    propertyType: "",
+    price: 0,
+    location: "",
+  },
 }: FormProps) => {
+  const [fields, setFields] = useState(data);
+
+  useEffect(() => {
+    if (data?.title !== "") setFields(data);
+  }, [data]);
+
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="#11142d">
@@ -55,7 +67,17 @@ const Form = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("title", { required: true })}
+              name="title"
+              value={fields?.title}
+              onChange={(e) => {
+                const value = e.target.value;
+                setFields((prevState: any) => {
+                  return {
+                    ...prevState,
+                    title: value,
+                  };
+                });
+              }}
             />
           </FormControl>
           <FormControl>
@@ -74,6 +96,17 @@ const Form = ({
               required
               placeholder="Write description"
               color="info"
+              name="description"
+              value={fields?.description}
+              onChange={(e) => {
+                const value = e.target.value;
+                setFields((prevState: any) => {
+                  return {
+                    ...prevState,
+                    description: value,
+                  };
+                });
+              }}
               style={{
                 width: "100%",
                 background: "transparent",
@@ -83,7 +116,6 @@ const Form = ({
                 padding: 10,
                 color: "#919191",
               }}
-              {...register("description", { required: true })}
             />
           </FormControl>
 
@@ -105,8 +137,17 @@ const Form = ({
                 displayEmpty
                 required
                 inputProps={{ "aria-label": "Without label" }}
-                defaultValue="apartment"
-                {...register("propertyType", { required: true })}
+                name="propertyType"
+                value={fields?.propertyType}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFields((prevState: any) => {
+                    return {
+                      ...prevState,
+                      propertyType: value,
+                    };
+                  });
+                }}
               >
                 <MenuItem value="apartment">Apartment</MenuItem>
                 <MenuItem value="villa">Villa</MenuItem>
@@ -136,7 +177,17 @@ const Form = ({
                 color="info"
                 type="number"
                 variant="outlined"
-                {...register("price", { required: true })}
+                name="price"
+                value={fields?.price}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFields((prevState: any) => {
+                    return {
+                      ...prevState,
+                      price: value,
+                    };
+                  });
+                }}
               />
             </FormControl>
           </Stack>
@@ -157,7 +208,17 @@ const Form = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("location", { required: true })}
+              name="location"
+              value={fields?.location}
+              onChange={(e) => {
+                const value = e.target.value;
+                setFields((prevState: any) => {
+                  return {
+                    ...prevState,
+                    location: value,
+                  };
+                });
+              }}
             />
           </FormControl>
           <Stack direction="column" gap={1} justifyContent="center" mb={2}>
@@ -201,7 +262,7 @@ const Form = ({
           </Stack>
           <CustomButton
             type="submit"
-            title={formLoading ? "Submiting..." : "Submit"}
+            title={"Submit"}
             backgroundColor="#475be8"
             color="#fcfcfc"
           />

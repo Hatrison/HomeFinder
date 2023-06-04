@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FieldValues, useForm } from "@pankod/refine-react-hook-form";
+import { FieldValues } from "@pankod/refine-react-hook-form";
 import Form from "components/common/Form";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
@@ -7,10 +7,6 @@ import { Navigate } from "react-router-dom";
 const CreateProperty = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
-  const {
-    refineCore: { onFinish, formLoading },
-    register,
-  } = useForm();
 
   const handleImageChange = (file: File) => {
     const reader = (readFile: File) =>
@@ -60,9 +56,6 @@ const CreateProperty = () => {
       {shouldRedirect && <Navigate to="/properties" replace />}
       <Form
         type="Create"
-        register={register}
-        onFinish={onFinish}
-        formLoading={formLoading}
         handleSubmit={handleSubmit}
         handleImageChange={handleImageChange}
         onFinishHandler={onFinishHandler}

@@ -7,6 +7,7 @@ export interface CustomButtonProps {
   icon?: ReactNode;
   disabled?: boolean;
   path?: string;
+  handleClick?: () => void;
 }
 
 export interface ProfileProps {
@@ -29,13 +30,15 @@ export interface PropertyProps {
 
 export interface FormProps {
   type: string;
-  register: any;
-  onFinish: (
-    values: FieldValues
-  ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>;
-  formLoading: boolean;
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined;
   handleImageChange: (file) => void;
   onFinishHandler: (data: FieldValues) => Promise<void> | void;
   propertyImage: { name: string; url: string };
+  data?: {
+    title: string;
+    description: string;
+    propertyType: string;
+    price: number;
+    location: string;
+  };
 }
