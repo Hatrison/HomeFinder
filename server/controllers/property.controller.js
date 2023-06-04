@@ -44,6 +44,8 @@ const createProperty = async (req, res) => {
     await session.commitTransaction();
 
     res.status(200).json({ message: "Property created successfully" });
+
+    await session.endSession();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
