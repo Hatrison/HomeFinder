@@ -72,7 +72,36 @@ const createProperty = async (req, res) => {
   }
 };
 
-const updateProperty = async (req, res) => {};
+const updateProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, propertyType, location, price, photo } =
+      req.body;
+
+    let photoUrl = "";
+    if (photo) {
+      photoUrl = await cloudinary.uploader.upload(photo);
+    }
+
+    await Property.findByIdAndUpdate(
+      { _id: id },
+      {
+        title,
+        description,
+        propertyType,
+        location,
+        price,
+        photo: photoUrl?.url || photo,
+      }
+    );
+
+    res.status(200).json({ message: "Property created successfully" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Failed to create property, please try again later" });
+  }
+};
 
 const deleteProperty = async (req, res) => {
   try {
