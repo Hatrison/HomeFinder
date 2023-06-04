@@ -1,15 +1,7 @@
-import { useList } from "@pankod/refine-core";
 import { Box, Typography, Stack } from "@pankod/refine-mui";
+import { PieChart, PropertyReferrals, TotalRevenue } from "components";
 
-import {
-  PieChart,
-  PropertyReferrals,
-  TotalRevenue,
-  PropertyCard,
-  TopAgent,
-} from "components";
-
-const home = () => {
+const Home = () => {
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="#11142d">
@@ -56,4 +48,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
