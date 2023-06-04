@@ -1,7 +1,7 @@
 import { Add } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@pankod/refine-mui";
 import axios from "axios";
-import { CustomButton, PropertyCard } from "components";
+import { CustomButton, PropertyCard } from "../components";
 import { useEffect, useState } from "react";
 
 const AllProperties = () => {

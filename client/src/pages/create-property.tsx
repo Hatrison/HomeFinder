@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FieldValues } from "@pankod/refine-react-hook-form";
-import Form from "components/common/Form";
+import Form from "../components/common/Form";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 

@@ -8,7 +8,7 @@ import {
   Stack,
 } from "@pankod/refine-mui";
 
-import { PropertyCardProps } from "interfaces/property";
+import { PropertyCardProps } from "../../interfaces/property";
 import { Link } from "react-router-dom";
 
 const PropertyCard = ({

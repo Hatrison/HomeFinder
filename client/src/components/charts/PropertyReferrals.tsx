@@ -1,5 +1,5 @@
 import { Box, Typography, Stack } from "@pankod/refine-mui";
-import { propertyReferralsInfo } from "constants/index";
+import { propertyReferralsInfo } from "../../constants/index";
 
 interface ProgressBarProps {
   title: string;

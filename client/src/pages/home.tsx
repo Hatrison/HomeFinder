@@ -1,5 +1,5 @@
 import { Box, Typography, Stack } from "@pankod/refine-mui";
-import { PieChart, PropertyReferrals, TotalRevenue } from "components";
+import { PieChart, PropertyReferrals, TotalRevenue } from "../components";
 
 const Home = () => {
   return (

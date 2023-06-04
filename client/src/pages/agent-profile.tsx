@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Profile } from "components";
+import { Profile } from "../components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 

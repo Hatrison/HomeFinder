@@ -9,7 +9,7 @@ import {
   Star,
 } from "@mui/icons-material";
 import { Navigate, useParams } from "react-router-dom";
-import { CustomButton } from "components";
+import { CustomButton } from "../components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
