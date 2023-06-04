@@ -16,10 +16,8 @@ import { useEffect, useState } from "react";
 
 const Form = ({
   type,
-  register,
   handleSubmit,
   handleImageChange,
-  formLoading,
   onFinishHandler,
   propertyImage,
   data = {
@@ -264,7 +262,7 @@ const Form = ({
           </Stack>
           <CustomButton
             type="submit"
-            title={formLoading ? "Submiting..." : "Submit"}
+            title={"Submit"}
             backgroundColor="#475be8"
             color="#fcfcfc"
           />

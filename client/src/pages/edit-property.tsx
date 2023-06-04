@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FieldValues, useForm } from "@pankod/refine-react-hook-form";
+import { FieldValues } from "@pankod/refine-react-hook-form";
 import Form from "components/common/Form";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
@@ -7,10 +7,6 @@ import { Navigate, useParams } from "react-router-dom";
 const EditProperty = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
-  const {
-    refineCore: { onFinish, formLoading },
-    register,
-  } = useForm();
   const { id } = useParams();
   const [data, setData] = useState({
     title: "",
@@ -84,9 +80,6 @@ const EditProperty = () => {
       {shouldRedirect && <Navigate to={`/properties/show/${id}`} replace />}
       <Form
         type="Edit"
-        register={register}
-        onFinish={onFinish}
-        formLoading={formLoading}
         handleSubmit={handleSubmit}
         handleImageChange={handleImageChange}
         onFinishHandler={onFinishHandler}
