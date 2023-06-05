@@ -16,6 +16,8 @@ import {
 } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
+jest.mock("axios");
+
 jest.mock("react-apexcharts", () => ({
   __esModule: true,
   default: () => <div />,
@@ -459,8 +461,6 @@ describe("PropertyCard component", () => {
   });
 });
 
-jest.mock("axios");
-
 describe("Agents component", () => {
   it("should render agents list", async () => {
     const agentsData = [
@@ -496,6 +496,43 @@ describe("Agents component", () => {
       expect(screen.findByText(agent.name));
       expect(screen.findByText(agent.email));
       expect(screen.findByText(`Properties: ${agent.allProperties.length}`));
+    });
+  });
+});
+
+describe("AllProperties component", () => {
+  it("should render all properties", async () => {
+    const propertiesData = [
+      {
+        _id: "1",
+        title: "Property 1",
+        price: 100000,
+        location: "Location 1",
+        photo: "photo1.png",
+      },
+      {
+        _id: "2",
+        title: "Property 2",
+        price: 200000,
+        location: "Location 2",
+        photo: "photo2.png",
+      },
+    ];
+
+    axios.get.mockResolvedValueOnce({ data: propertiesData });
+
+    render(
+      <BrowserRouter>
+        <AllProperties />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText("All Properties")).toBeInTheDocument();
+
+    propertiesData.forEach((property) => {
+      expect(screen.findByText(property.title));
+      expect(screen.findByText(`Price: ${property.price}`));
+      expect(screen.findByText(`Location: ${property.location}`));
     });
   });
 });
