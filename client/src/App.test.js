@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import axios from "axios";
-import { Home, AgentProfile, Agents, AllProperties } from "./pages";
+import { Home, AgentProfile, Agents, AllProperties, MyProfile } from "./pages";
 import {
   AgentCard,
   PieChart,
@@ -559,5 +559,37 @@ describe("AllProperties component", () => {
       expect(screen.findByText(`Price: ${property.price}`));
       expect(screen.findByText(`Location: ${property.location}`));
     });
+  });
+});
+
+describe("MyProfile component", () => {
+  beforeEach(() => {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ userid: "1", email: "user@example.com" })
+    );
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+  });
+
+  it("should render my profile", async () => {
+    const myProfileData = {
+      _id: "1",
+      name: "My Name",
+      email: "user@example.com",
+      avatar: "avatar.png",
+      allProperties: [],
+    };
+
+    axios.get.mockResolvedValueOnce({ data: myProfileData });
+
+    render(<MyProfile />);
+
+    expect(screen.getByText("My Profile")).toBeInTheDocument();
+
+    expect(screen.findByText(myProfileData.name));
+    expect(screen.findByText(myProfileData.email));
   });
 });
