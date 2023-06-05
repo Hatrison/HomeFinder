@@ -19,7 +19,11 @@ const PropertyCard = ({
   photo,
 }: PropertyCardProps) => {
   return (
-    <Link to={`/properties/show/${id}`} style={{ textDecoration: "none" }}>
+    <Link
+      data-testid="link"
+      to={`/properties/show/${id}`}
+      style={{ textDecoration: "none" }}
+    >
       <Card
         sx={{
           maxWidth: "330px",

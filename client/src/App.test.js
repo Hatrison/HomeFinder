@@ -11,6 +11,7 @@ import {
   CustomButton,
   Form,
   Profile,
+  PropertyCard,
 } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
@@ -420,5 +421,39 @@ describe("Profile component", () => {
     render(<Profile {...mockProfile} />);
 
     expect(screen.queryByText("User Properties")).toBeNull();
+  });
+});
+
+describe("PropertyCard component", () => {
+  const mockProperty = {
+    id: "1",
+    title: "Property 1",
+    location: "Location 1",
+    price: 100000,
+    photo: "property1.jpg",
+  };
+
+  test("renders property information correctly", () => {
+    render(
+      <BrowserRouter>
+        <PropertyCard {...mockProperty} />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText("Property 1")).toBeInTheDocument();
+    expect(screen.getByText("Location 1")).toBeInTheDocument();
+    expect(screen.getByText("$100000")).toBeInTheDocument();
+  });
+
+  test("renders property card as a link", () => {
+    render(
+      <BrowserRouter>
+        <PropertyCard {...mockProperty} />
+      </BrowserRouter>
+    );
+
+    const linkElement = screen.getByTestId("link");
+    expect(linkElement).toHaveAttribute("href", "/properties/show/1");
+    expect(linkElement).toHaveStyle("text-decoration: none");
   });
 });
