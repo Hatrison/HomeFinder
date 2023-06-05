@@ -38,7 +38,7 @@ const AgentCard = ({
   };
 
   return (
-    <Link to={generateLink()}>
+    <Link to={generateLink()} style={{ textDecoration: "none" }}>
       <Box
         width="100%"
         sx={{
