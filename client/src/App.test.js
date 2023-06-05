@@ -10,6 +10,7 @@ import {
   PieChart,
   PropertyReferrals,
   TotalRevenue,
+  CustomButton,
 } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
@@ -239,5 +240,58 @@ describe("TotalRevenue", () => {
 
     const chart = screen.getByTestId("chart");
     expect(chart).toBeInTheDocument();
+  });
+});
+
+describe("CustomButton", () => {
+  it("renders the button with correct title and styling", () => {
+    render(
+      <CustomButton title="Submit" backgroundColor="#ff0000" color="#ffffff" />
+    );
+
+    const buttonElement = screen.getByText("Submit");
+    expect(buttonElement).toBeInTheDocument();
+    expect(buttonElement).toHaveStyle({ backgroundColor: "#ff0000" });
+    expect(buttonElement).toHaveStyle({ color: "#ffffff" });
+  });
+
+  it("renders the button with icon and title", () => {
+    render(
+      <CustomButton
+        title="Go Home"
+        icon={<i className="icon-home" />}
+        backgroundColor="#00ff00"
+        color="#000000"
+      />
+    );
+
+    const buttonElement = screen.getByText("Go Home");
+    expect(buttonElement).toBeInTheDocument();
+
+    const iconElement = document.querySelector(".icon-home");
+    expect(iconElement).toBeInTheDocument();
+  });
+
+  it("renders the button as a link with correct path", () => {
+    render(
+      <BrowserRouter>
+        <CustomButton title="Go to Profile" path="/profile" />
+      </BrowserRouter>
+    );
+
+    const linkElement = screen.getByTestId("link");
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute("href", "/profile");
+  });
+
+  it("calls the handleClick function when button is clicked", () => {
+    const handleClick = jest.fn();
+    render(<CustomButton title="Click Me" handleClick={handleClick} />);
+
+    const buttonElement = screen.getByText("Click Me");
+    expect(buttonElement).toBeInTheDocument();
+
+    buttonElement.click();
+    expect(handleClick).toHaveBeenCalled();
   });
 });
