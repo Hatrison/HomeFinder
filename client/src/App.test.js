@@ -3,7 +3,14 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import axios from "axios";
-import { Home, AgentProfile, Agents, AllProperties, MyProfile } from "./pages";
+import {
+  Home,
+  AgentProfile,
+  Agents,
+  AllProperties,
+  MyProfile,
+  PropertyDetails,
+} from "./pages";
 import {
   AgentCard,
   PieChart,
@@ -591,5 +598,42 @@ describe("MyProfile component", () => {
 
     expect(screen.findByText(myProfileData.name));
     expect(screen.findByText(myProfileData.email));
+  });
+});
+
+describe("PropertyDetails component", () => {
+  const propertyId = "1";
+  const mockData = {
+    _id: propertyId,
+    creator: {
+      _id: "1",
+      name: "John Doe",
+      email: "johndoe@example.com",
+      avatar: "avatar.png",
+      allProperties: [],
+    },
+    description: "Lorem ipsum dolor sit amet",
+    location: "New York",
+    photo: "property.jpg",
+    price: 200,
+    propertyType: "House",
+    title: "Beautiful House",
+  };
+
+  axios.get.mockResolvedValueOnce({ data: mockData });
+  localStorage.setItem(
+    "user",
+    JSON.stringify({ email: "johndoe@example.com" })
+  );
+
+  it("should render property details", async () => {
+    render(<PropertyDetails />);
+
+    expect(screen.getByText("Details")).toBeInTheDocument();
+
+    expect(screen.findByText(mockData.title));
+    expect(screen.findByText(mockData.location));
+    expect(screen.findByText(`$${mockData.price}`));
+    expect(screen.findByText(mockData.description));
   });
 });
