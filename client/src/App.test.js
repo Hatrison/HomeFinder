@@ -2,7 +2,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Home, AllProperties } from "./pages";
+import axios from "axios";
+import { Home, Agents, AllProperties } from "./pages";
 import {
   AgentCard,
   PieChart,
@@ -455,5 +456,46 @@ describe("PropertyCard component", () => {
     const linkElement = screen.getByTestId("link");
     expect(linkElement).toHaveAttribute("href", "/properties/show/1");
     expect(linkElement).toHaveStyle("text-decoration: none");
+  });
+});
+
+jest.mock("axios");
+
+describe("Agents component", () => {
+  it("should render agents list", async () => {
+    const agentsData = [
+      {
+        _id: "1",
+        name: "Agent 1",
+        email: "agent1@example.com",
+        avatar: "avatar1.png",
+        allProperties: [],
+      },
+      {
+        _id: "2",
+        name: "Agent 2",
+        email: "agent2@example.com",
+        avatar: "avatar2.png",
+        allProperties: [],
+      },
+    ];
+
+    axios.get.mockResolvedValueOnce({ data: agentsData });
+
+    screen.debug();
+
+    render(
+      <BrowserRouter>
+        <Agents />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText("Agents List")).toBeInTheDocument();
+
+    agentsData.forEach((agent) => {
+      expect(screen.findByText(agent.name));
+      expect(screen.findByText(agent.email));
+      expect(screen.findByText(`Properties: ${agent.allProperties.length}`));
+    });
   });
 });
