@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import axios from "axios";
-import { Home, Agents, AllProperties } from "./pages";
+import { Home, AgentProfile, Agents, AllProperties } from "./pages";
 import {
   AgentCard,
   PieChart,
@@ -458,6 +458,31 @@ describe("PropertyCard component", () => {
     const linkElement = screen.getByTestId("link");
     expect(linkElement).toHaveAttribute("href", "/properties/show/1");
     expect(linkElement).toHaveStyle("text-decoration: none");
+  });
+});
+
+describe("AgentProfile component", () => {
+  it("should render agent profile", async () => {
+    const agentData = {
+      _id: "1",
+      name: "Agent 1",
+      email: "agent1@example.com",
+      avatar: "avatar1.png",
+      allProperties: [],
+    };
+
+    axios.get.mockResolvedValueOnce({ data: agentData });
+
+    render(
+      <BrowserRouter>
+        <AgentProfile />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText(/Agent Profile/i)).toBeInTheDocument();
+
+    expect(screen.findByText(agentData.name));
+    expect(screen.findByText(agentData.email));
   });
 });
 
