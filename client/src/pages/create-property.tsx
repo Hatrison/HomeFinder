@@ -28,11 +28,14 @@ const CreateProperty = () => {
     if (user) {
       const parsedUser = JSON.parse(user);
 
-      await axios.post("http://localhost:8080/api/v1/properties", {
-        ...data,
-        photo: propertyImage.url,
-        email: parsedUser.email,
-      });
+      await axios.post(
+        "https://homefinder-0zn2.onrender.com/api/v1/properties",
+        {
+          ...data,
+          photo: propertyImage.url,
+          email: parsedUser.email,
+        }
+      );
 
       setShouldRedirect(true);
     }

@@ -54,7 +54,7 @@ const PropertyDetails = () => {
   const fetchProperty = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/properties/${id}`
+        `https://homefinder-0zn2.onrender.com/api/v1/properties/${id}`
       );
       setData(response.data);
     } catch (error) {
@@ -64,7 +64,9 @@ const PropertyDetails = () => {
 
   const deleteProperty = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:8080/api/v1/properties/${id}`);
+      await axios.delete(
+        `https://homefinder-0zn2.onrender.com/api/v1/properties/${id}`
+      );
       setShouldRedirect(true);
     } catch (error) {
       console.log(error);

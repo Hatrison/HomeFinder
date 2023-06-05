@@ -14,7 +14,7 @@ const MyProfile = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/users/${currentUser.userid}`
+        `https://homefinder-0zn2.onrender.com/api/v1/users/${currentUser.userid}`
       );
       setMyProfile(response.data);
     } catch (error) {

@@ -8,7 +8,9 @@ const Agents = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/users");
+      const response = await axios.get(
+        "https://homefinder-0zn2.onrender.com/api/v1/users"
+      );
       setAllAgents(response.data);
     } catch (error) {
       console.log(error);

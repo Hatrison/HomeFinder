@@ -11,7 +11,7 @@ const AllProperties = () => {
     const fetchProperties = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/v1/properties"
+          "https://homefinder-0zn2.onrender.com/api/v1/properties"
         );
         setData(response.data);
       } catch (error) {

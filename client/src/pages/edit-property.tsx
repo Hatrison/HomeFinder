@@ -19,7 +19,7 @@ const EditProperty = () => {
   const fetchProperty = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/properties/${id}`
+        `https://homefinder-0zn2.onrender.com/api/v1/properties/${id}`
       );
       setData(response.data);
     } catch (error) {
@@ -52,11 +52,14 @@ const EditProperty = () => {
     if (user) {
       const parsedUser = JSON.parse(user);
 
-      await axios.patch(`http://localhost:8080/api/v1/properties/${id}`, {
-        ...data,
-        photo: propertyImage.url,
-        email: parsedUser.email,
-      });
+      await axios.patch(
+        `https://homefinder-0zn2.onrender.com/api/v1/properties/${id}`,
+        {
+          ...data,
+          photo: propertyImage.url,
+          email: parsedUser.email,
+        }
+      );
 
       setShouldRedirect(true);
     }
