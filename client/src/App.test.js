@@ -10,6 +10,7 @@ import {
   TotalRevenue,
   CustomButton,
   Form,
+  Profile,
 } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
@@ -352,5 +353,72 @@ describe("Form", () => {
     const uploadInput = screen.getByLabelText("Upload *");
     fireEvent.change(uploadInput, { target: { files: [file] } });
     expect(handleImageChange).toHaveBeenCalledWith(file);
+  });
+});
+
+describe("Profile component", () => {
+  test("renders profile information correctly", () => {
+    const mockProfile = {
+      type: "User",
+      name: "John Doe",
+      avatar: "avatar.jpg",
+      email: "john.doe@example.com",
+      properties: [
+        {
+          _id: "1",
+          title: "Property 1",
+          location: "Location 1",
+          price: 100000,
+          photo: "property1.jpg",
+        },
+        {
+          _id: "2",
+          title: "Property 2",
+          location: "Location 2",
+          price: 200000,
+          photo: "property2.jpg",
+        },
+      ],
+    };
+
+    render(
+      <BrowserRouter>
+        <Profile {...mockProfile} />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText("User Profile")).toBeInTheDocument();
+    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getByText("Realestate Agent")).toBeInTheDocument();
+    expect(screen.getByText("Address")).toBeInTheDocument();
+    expect(screen.getByText("Phone Number")).toBeInTheDocument();
+    expect(screen.getByText("Email")).toBeInTheDocument();
+    expect(
+      screen.getByText("4517 Washington Ave. Manchaster, Kentucky 39495")
+    ).toBeInTheDocument();
+    expect(screen.getByText("+0123 456 7890")).toBeInTheDocument();
+    expect(screen.getByText("john.doe@example.com")).toBeInTheDocument();
+
+    expect(screen.getByText("User Properties")).toBeInTheDocument();
+    expect(screen.getByText("Property 1")).toBeInTheDocument();
+    expect(screen.getByText("Property 2")).toBeInTheDocument();
+    expect(screen.getByText("Location 1")).toBeInTheDocument();
+    expect(screen.getByText("Location 2")).toBeInTheDocument();
+    expect(screen.getByText("$100000")).toBeInTheDocument();
+    expect(screen.getByText("$200000")).toBeInTheDocument();
+  });
+
+  test("does not render properties section when no properties are provided", () => {
+    const mockProfile = {
+      type: "User",
+      name: "John Doe",
+      avatar: "avatar.jpg",
+      email: "john.doe@example.com",
+      properties: [],
+    };
+
+    render(<Profile {...mockProfile} />);
+
+    expect(screen.queryByText("User Properties")).toBeNull();
   });
 });
