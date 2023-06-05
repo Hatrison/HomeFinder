@@ -20,7 +20,9 @@ const AgentCard = ({
   avatar,
   noOfProperties,
 }: AgentCardProp) => {
-  const [currentUser, setCurrentUser] = useState<any>({});
+  const [currentUser, setCurrentUser] = useState<{ email: string }>({
+    email: "",
+  });
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -32,8 +34,7 @@ const AgentCard = ({
   }, []);
 
   const generateLink = () => {
-    if (currentUser?.email === email) return "/my-profile";
-    return `/agents/show/${id}`;
+    return currentUser?.email === email ? "/my-profile" : `/agents/show/${id}`;
   };
 
   return (
