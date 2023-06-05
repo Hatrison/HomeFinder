@@ -7,6 +7,7 @@ const TotalRevenue = () => {
   return (
     <Box
       id="chart"
+      data-testid="chart"
       p={4}
       flex={1}
       bgcolor="#fcfcfc"

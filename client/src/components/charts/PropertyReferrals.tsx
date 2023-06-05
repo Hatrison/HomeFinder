@@ -9,7 +9,7 @@ interface ProgressBarProps {
 
 const ProgressBar = ({ title, percentage, color }: ProgressBarProps) => {
   return (
-    <Box width="100%">
+    <Box width="100%" data-testid="progress-bar">
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography fontSize={16} fontWeight={500} color="#11142d">
           {title}
