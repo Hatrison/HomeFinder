@@ -1,9 +1,7 @@
 /* eslint-disable */
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import { Home, AllProperties } from "./pages";
 import {
   AgentCard,
@@ -11,6 +9,7 @@ import {
   PropertyReferrals,
   TotalRevenue,
   CustomButton,
+  Form,
 } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
@@ -293,5 +292,65 @@ describe("CustomButton", () => {
 
     buttonElement.click();
     expect(handleClick).toHaveBeenCalled();
+  });
+});
+
+describe("Form", () => {
+  it("renders the form with correct fields", () => {
+    render(<Form type="Add" handleSubmit={() => {}} />);
+
+    const formTitle = screen.getByText("Add a Property");
+    expect(formTitle).toBeInTheDocument();
+
+    const propertyTitleField = screen.getByTestId("title");
+    expect(propertyTitleField).toBeInTheDocument();
+
+    const propertyDescriptionField = screen.getByTestId("description");
+    expect(propertyDescriptionField).toBeInTheDocument();
+
+    const propertyTypeField = screen.getByTestId("propertyType");
+    expect(propertyTypeField).toBeInTheDocument();
+
+    const propertyPriceField = screen.getByTestId("price");
+    expect(propertyPriceField).toBeInTheDocument();
+
+    const propertyLocationField = screen.getByTestId("location");
+    expect(propertyLocationField).toBeInTheDocument();
+
+    const propertyPhotoUploadButton = screen.getByText("Upload *");
+    expect(propertyPhotoUploadButton).toBeInTheDocument();
+  });
+
+  it("calls the handleSubmit function when form is submitted", () => {
+    const handleSubmit = jest.fn();
+    render(
+      <Form
+        type="Add"
+        handleSubmit={handleSubmit}
+        handleImageChange={() => {}}
+      />
+    );
+
+    const formElement = screen.getByTestId("form");
+    fireEvent.submit(formElement);
+    expect(handleSubmit).toHaveBeenCalled();
+  });
+
+  it("calls the handleImageChange function when photo is uploaded", () => {
+    const handleImageChange = jest.fn();
+    render(
+      <Form
+        type="Add"
+        handleSubmit={() => {}}
+        handleImageChange={handleImageChange}
+      />
+    );
+
+    const file = new File(["dummy content"], "photo.jpg", {
+      type: "image/jpeg",
+    });
+    const uploadInput = screen.getByLabelText("Upload *");
+    fireEvent.change(uploadInput, { target: { files: [file] } });
+    expect(handleImageChange).toHaveBeenCalledWith(file);
   });
 });
