@@ -10,7 +10,7 @@ import {
   MenuItem,
   Button,
 } from "@pankod/refine-mui";
-import { FormProps } from "interfaces/common";
+import { FormProps } from "../../interfaces/common";
 import CustomButton from "./CustomButton";
 import { useEffect, useState } from "react";
 
@@ -41,6 +41,7 @@ const Form = ({
       </Typography>
       <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
         <form
+          data-testid="form"
           style={{
             marginTop: "20px",
             width: "100%",
@@ -62,6 +63,7 @@ const Form = ({
               Enter property name
             </FormHelperText>
             <TextField
+              data-testid="title"
               fullWidth
               required
               id="outlined-basic"
@@ -92,6 +94,7 @@ const Form = ({
               Enter description
             </FormHelperText>
             <TextareaAutosize
+              data-testid="description"
               minRows={5}
               required
               placeholder="Write description"
@@ -132,6 +135,7 @@ const Form = ({
                 Select property type
               </FormHelperText>
               <Select
+                data-testid="propertyType"
                 variant="outlined"
                 color="info"
                 displayEmpty
@@ -171,6 +175,7 @@ const Form = ({
                 Enter property price
               </FormHelperText>
               <TextField
+                data-testid="price"
                 fullWidth
                 required
                 id="outlined-basic"
@@ -203,6 +208,7 @@ const Form = ({
               Enter location
             </FormHelperText>
             <TextField
+              data-testid="location"
               fullWidth
               required
               id="outlined-basic"

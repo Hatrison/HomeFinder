@@ -5,6 +5,7 @@ import PieChart from "./charts/PieChart";
 import PropertyReferrals from "./charts/PropertyReferrals";
 import TotalRevenue from "./charts/TotalRevenue";
 import AgentCard from "./agent/AgentCard";
+import Form from "./common/Form";
 
 export {
   Profile,
@@ -14,4 +15,5 @@ export {
   PropertyReferrals,
   TotalRevenue,
   AgentCard,
+  Form,
 };

@@ -1,12 +1,10 @@
 import { useLogin } from "@refinedev/core";
 import { useEffect, useRef } from "react";
-
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-
 import { CredentialResponse } from "../interfaces/google";
-import { homefinder } from "assets";
+import { homefinder } from "../assets";
 
 // Todo: Update your Google Client ID here
 const GOOGLE_CLIENT_ID =

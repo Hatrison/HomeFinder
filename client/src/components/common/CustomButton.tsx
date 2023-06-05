@@ -41,7 +41,7 @@ const CustomButton = ({
   };
 
   return path ? (
-    <Link to={path}>
+    <Link data-testid="link" to={path}>
       <Btn />
     </Link>
   ) : (

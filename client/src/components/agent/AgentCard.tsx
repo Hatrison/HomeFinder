@@ -1,7 +1,7 @@
 import { EmailOutlined, LocationCity, Phone, Place } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@pankod/refine-mui";
 import { Link } from "react-router-dom";
-import { AgentCardProp, InfoBarProps } from "interfaces/agent";
+import { AgentCardProp, InfoBarProps } from "../../interfaces/agent";
 import { useEffect, useState } from "react";
 
 const InfoBar = ({ icon, name }: InfoBarProps) => (

@@ -1,6 +1,6 @@
 import { Email, Phone, Place } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@pankod/refine-mui";
-import { ProfileProps, PropertyProps } from "interfaces/common";
+import { ProfileProps, PropertyProps } from "../../interfaces/common";
 import PropertyCard from "./PropertyCard";
 
 const Profile = ({

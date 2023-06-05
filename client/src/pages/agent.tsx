@@ -1,7 +1,6 @@
 import { Box, Typography } from "@pankod/refine-mui";
 import axios from "axios";
-
-import { AgentCard } from "components";
+import { AgentCard } from "../components";
 import { useEffect, useState } from "react";
 
 const Agents = () => {
